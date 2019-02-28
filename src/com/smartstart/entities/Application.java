@@ -15,7 +15,10 @@ public class Application {
     private fos_user freelancer;
     private String state;
   
-public Application(){}
+public Application(){
+    opp=new Opportunity();
+    freelancer=new fos_user();
+}
 
 public Application(int id,Opportunity opp/*,Fos_user freelancer*/,String state)
 {this.id=id;
@@ -54,7 +57,8 @@ public Application(Opportunity opp,fos_user freelancer) {
     
 public int getId()
 {return id;}
-
+public void setId(int id)
+{this.id=id;}
 public String getState()
 {return state;}
 
@@ -73,11 +77,11 @@ public void setState(String state)
 
 
 
-@Override
+/*@Override
     public String toString()
     {
         return "Application id :"+id+" Opportunity Id :"+opp.getId_Opp()+" Freelancer Id: "+freelancer.getId()+" State : "+state;
-    }
+    }*/
 
 
 

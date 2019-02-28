@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="plan" prefHeight="157.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton fx:id="question" contentDisplay="CENTER" layoutX="97.0" layoutY="10.0" prefHeight="27.0" prefWidth="560.0">
+         <opaqueInsets>
+            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+         </opaqueInsets></JFXButton>
+      <Label fx:id="subject" layoutX="720.0" layoutY="15.0" prefHeight="27.0" prefWidth="60.0" text="subject" />
+      <Label fx:id="qdate" layoutX="5.0" layoutY="8.0" prefHeight="27.0" prefWidth="70.0" text="date" />
+      <Label fx:id="votes" alignment="CENTER" layoutX="5.0" layoutY="113.0" prefHeight="27.0" prefWidth="70.0" text="votes" />
+      <Label fx:id="views" alignment="CENTER" layoutX="5.0" layoutY="40.0" prefHeight="27.0" prefWidth="70.0" text="views" />
+      <Label fx:id="rdate" layoutX="5.0" layoutY="82.0" prefHeight="27.0" prefWidth="70.0" text="deate" />
+      <Separator layoutX="82.0" layoutY="43.0" prefHeight="6.0" prefWidth="697.0" />
+      <Separator layoutX="74.0" layoutY="9.0" orientation="VERTICAL" prefHeight="141.0" prefWidth="12.0" />
+      <Separator layoutX="9.0" layoutY="72.0" prefHeight="6.0" prefWidth="60.0" />
+      <Label fx:id="reply" alignment="TOP_LEFT" layoutX="81.0" layoutY="48.0" prefHeight="102.0" prefWidth="697.0" />
+   </children>
+</AnchorPane>

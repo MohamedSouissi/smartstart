@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.LoginController">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.LoginController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -21,24 +22,25 @@
             <Pane layoutX="10.0" layoutY="10.0" prefHeight="377.0" prefWidth="850.0" />
          </children>
       </VBox>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #003f68;">
          <children>
             <AnchorPane layoutX="226.0" layoutY="122.0" prefHeight="407.0" prefWidth="399.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 3;">
                <children>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="160.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="164.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Utilisateur.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgProgress" fitHeight="64.0" fitWidth="64.0" layoutX="168.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgProgress" fitHeight="64.0" fitWidth="64.0" layoutX="168.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Preloader_9.gif" />
                      </image>
                   </ImageView>
                   <TextField fx:id="username" layoutX="125.0" layoutY="152.0" promptText="Username" />
-                  <TextField fx:id="password" layoutX="125.0" layoutY="204.0" promptText="Password" />
                   <Button fx:id="login" layoutX="174.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" text="Login" />
-                  <Label fx:id="isconnected" layoutX="170.0" layoutY="299.0" text="Connexion" />
+                  <Label fx:id="isconnected" layoutX="13.0" layoutY="378.0" text="Connexion" textFill="#1ba811" />
+                  <Hyperlink fx:id="pass_forgot" layoutX="288.0" layoutY="373.0" onAction="#forgot" text="Forgot password?" />
+                  <PasswordField fx:id="password" layoutX="125.0" layoutY="204.0" promptText="Password" />
                </children>
             </AnchorPane>
             <Label layoutX="373.0" layoutY="26.0" text="Smart Start" textFill="WHITE">
@@ -52,7 +54,8 @@
                </font>
             </Label>
             <Separator layoutX="350.0" layoutY="94.0" opacity="0.9" prefWidth="150.0" />
-            <Hyperlink fx:id="Newaccount" layoutX="311.0" layoutY="542.0" onAction="#newaccount" prefHeight="29.0" prefWidth="275.0" text="Je souhaite créer un compte Freelancer! " />
+            <Hyperlink fx:id="Newaccount" layoutX="129.0" layoutY="544.0" onAction="#newaccount" prefHeight="29.0" prefWidth="290.0" text="Je souhaite créer un compte Freelancer! " textFill="WHITE" />
+            <Hyperlink layoutX="464.0" layoutY="544.0" text="Je souhaire créer un compte entreprise" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

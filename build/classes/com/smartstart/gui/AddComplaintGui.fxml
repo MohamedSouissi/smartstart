@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="parent" prefHeight="357.0" prefWidth="721.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.AddComplaintGuiController">
+    <children>
+      <BorderPane prefHeight="92.0" prefWidth="721.0" AnchorPane.bottomAnchor="465.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <Pane prefHeight="327.0" prefWidth="721.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="83.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                     <font>
+                        <Font name="Montserrat-Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="83.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subject" wrappingWidth="99.94107055664062">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <ChoiceBox fx:id="subject" layoutX="262.0" layoutY="145.0" prefHeight="25.0" prefWidth="382.0" />
+                  <TextField fx:id="mail" layoutX="261.0" layoutY="72.0" prefHeight="25.0" prefWidth="382.0" />
+                  <Text layoutX="83.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Content">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </center>
+         <top>
+            <Label fx:id="type" alignment="CENTER" prefHeight="92.0" prefWidth="853.0" style="-fx-background-color: #003f68;" styleClass="card-01" stylesheets="@stylesheet.css" text="Complaint" textFill="#f2e4e4" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </top></BorderPane>
+      <Button fx:id="add" layoutX="276.0" layoutY="485.0" mnemonicParsing="false" onAction="#AddComplaint" prefHeight="40.0" prefWidth="382.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="Add Complaint" textFill="WHITE">
+         <cursor>
+           
+         </cursor>
+      </Button>
+      <Separator layoutX="2.0" layoutY="449.0" prefHeight="7.0" prefWidth="713.0" />
+      <Button fx:id="CancelButton" layoutX="66.0" layoutY="485.0" mnemonicParsing="false" onAction="#annuler" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: red;" stylesheets="@stylesheet.css" text="Cancel" textFill="WHITE">
+         <cursor>
+          
+         </cursor>
+      </Button>
+      <TextField fx:id="content" layoutX="263.0" layoutY="305.0" prefHeight="119.0" prefWidth="382.0" />
+    </children>
+</AnchorPane>

@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javax.xml.bind.DatatypeConverter;
 
@@ -52,6 +53,21 @@ public class Freelancer_RegisterGUIController implements Initializable {
     private TextField city;
     @FXML
     private ImageView file;
+    private Label Nomremplir;
+    @FXML
+    private Label noname;
+    @FXML
+    private Label nolastname;
+    @FXML
+    private Label nopassword;
+    @FXML
+    private Label noemail;
+    @FXML
+    private Label nousername;
+    @FXML
+    private Label nobirthdate;
+    @FXML
+    private Label nocountry;
     
 
     /**
@@ -79,8 +95,45 @@ public class Freelancer_RegisterGUIController implements Initializable {
          SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");  
 Date datecurrent = new Date(System.currentTimeMillis());  
 //System.out.println(formatter.format(date));  
-       
+//controle de saisie
+       if(username.getText().isEmpty()  )
+       {
+            nousername.setVisible(true);
+           nousername.setText("veuilleuz remplir le nom");
+       }
+         if(password.getText().isEmpty()  )
+       {
+           nopassword.setVisible(true);
+           nopassword.setText("veuilleuz remplir le champ mot de passe");
+       }
+             if(email.getText().isEmpty() ||email.getText().contains("@") ==false )
+       {
+           noemail.setVisible(true);
+           noemail.setText("veuilleuz remplir un email valide");
+       }
+             if(name.getText().isEmpty())
+             {
+                 noname.setVisible(true);
+                 noname.setText("Entrer un nom");
+             }
+              if(last_name.getText().isEmpty())
+             {
+                 nolastname.setVisible(true);
+                 nolastname.setText("Entrer un nom de famille");
+             }
+              /*    if(birth_date.getValue().isAfter(0))
+             {
+                 nolastname.setVisible(true);
+                 nolastname.setText("Entrer un nom de famille");
+             }*/
+              if(country.getText().isEmpty())
+              {
+                  nocountry.setVisible(true);
+                  nocountry.setText("enter a country");
+              }
+              
        //location
+       else {
         String location =(""+country.getText()+","+state.getText().toString()+","+city.getText().toString()+"");
      //el canonical = crypted
      String encodedpass = DatatypeConverter.printBase64Binary(password.getText().getBytes());
@@ -90,9 +143,8 @@ Date datecurrent = new Date(System.currentTimeMillis());
         Date birthdate = new Date(birth_date.getValue().getYear(),birth_date.getValue().getMonthValue(),
         birth_date.getValue().getDayOfMonth());
         //confirmation 
-       String code = fs.random_code(12);
+        String code = fs.random_code(12);
         String encodedconfirmation = DatatypeConverter.printBase64Binary("ss".getBytes());
-        
         
              //BIO A AJOUTER
         fos_user u = new fos_user(0,username.getText(),encodedpass,email.getText(),encodedmail,0,"salt",
@@ -102,5 +154,5 @@ Date datecurrent = new Date(System.currentTimeMillis());
         System.out.println("USER ADDED"); 
         fs.sendmail(email.getText(), code);
     }
-    
+    }
 }

@@ -12,24 +12,27 @@ import java.util.Date;
  * @author diabl
  */
 public class Contract {
+
     private int id_contract;
     private String payment_method;
     private Date start_date;
     private Date finish_date;
     private float sum;
-    private int id_application;
-    private String freelancer;
-    private String description;
-    
-    
-    public Contract(){}
-    
-    public Contract(int id_contract,String payment_method,Date start_date,Date finish_date,float sum,int id_application){
-       this.payment_method = payment_method;
-       this.start_date = start_date;
-       this.finish_date = finish_date;
-       this.sum = sum;
-       this.id_application = id_application;
+    private Application application;
+    private fos_user user;
+    private int prio;
+
+    public Contract() {
+        application = new Application();
+        user = new fos_user();
+    }
+
+    public Contract(int id_contract, String payment_method, Date start_date, Date finish_date, float sum, Application application) {
+        this.payment_method = payment_method;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
+        this.sum = sum;
+        this.application = application;
     }
 
     public int getId_contract() {
@@ -72,29 +75,28 @@ public class Contract {
         this.sum = sum;
     }
 
-    public int getId_application() {
-        return id_application;
+    public Application getApplication() {
+        return application;
     }
 
-    public void setId_application(int id_application) {
-        this.id_application = id_application;
-    }
-    public String getFreelancer() {
-        return freelancer;
+    public void setId_application(Application application) {
+        this.application = application;
     }
 
-    public void setFreelancer(String freelancer) {
-        this.freelancer = freelancer;
+    public fos_user getUser() {
+        return user;
     }
 
-    public String getDescription() {
-        return description;
+    public void setUser(fos_user user) {
+        this.user = user;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getPrio() {
+        return prio;
     }
-    
-    
-    
+
+    public void setPrio(int prio) {
+        this.prio = prio;
+    }
+
 }

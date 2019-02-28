@@ -5,6 +5,7 @@
  */
 package com.smartstart.entities;
 
+import com.smartstart.services.fos_userInterface;
 import java.sql.Date;
 
 /**
@@ -36,6 +37,15 @@ public class fos_user implements fos_userInterface {
     String field_company ;
 
     public fos_user() {
+    }
+    public fos_user(String username,String email) {
+        this.username=username;
+        this.email=email;
+    }
+     public fos_user(String username,String email,String name) {
+        this.username=username;
+        this.email=email;
+        this.username=name;
     }
 
     public fos_user(int id, String username, String username_canonical, String email, String email_canonical,

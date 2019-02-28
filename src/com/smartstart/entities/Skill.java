@@ -14,6 +14,7 @@ public class Skill {
     private String name;
     public Skill(int id,String name){this.id=id; this.name=name;}
     public Skill(int id){this.id=id;}
+     public Skill(){}
     
     
     public int getId(){return id;}

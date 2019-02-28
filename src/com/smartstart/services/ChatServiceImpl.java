@@ -5,6 +5,7 @@
  */
 package com.smartstart.services;
 import com.smartstart.entities.Message;
+import com.smartstart.entities.fos_user;
 import com.smartstart.util.ConnectionDb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,19 +35,24 @@ public class ChatServiceImpl implements ChatServiceInterface {
         
     
     @Override
-    public void addMsg(Message m) throws SQLException {
+    public void addMsg(Message m)   {
        
+            try {
                 ConnectionDb db = ConnectionDb.getInstance();
                 Connection cn = db.getCnx();
                 String query = "INSERT INTO `messages`(`message_from`, `message_to`, `content`, `attachement` , `date_message` , `viewed`) VALUES (?,?,?,?,?,?)";
-		PreparedStatement st  = cn.prepareStatement(query);
-                st.setInt(1, m.getMessage_from());
-                st.setInt(2,m.getMessage_to());
+                PreparedStatement st  = cn.prepareStatement(query);
+                st.setInt(1, m.getMessage_from().getId());
+                st.setInt(2,m.getMessage_to().getId());
                 st.setString(3,m.getContent());
                 st.setString(4,m.getAttachment());
                 java.sql.Date date = new java.sql.Date(m.getDate_message().getTime());
                 st.setDate(5,date );
-                st.setInt(6,m.getViewed());
+                st.setInt(6,0);
+                st.execute();
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage()+" =================");
+            }
                 
            
 
@@ -90,10 +98,10 @@ public class ChatServiceImpl implements ChatServiceInterface {
 	}   
 
     @Override
-    public ObservableList<Integer> discussionList(int id) throws SQLException{
+    public ObservableList<fos_user> discussionList(int id) throws SQLException{
         ConnectionDb db = ConnectionDb.getInstance();
                 Connection cn = db.getCnx();
-                String query = "SELECT * FROM `message` WHERE ((`message_from` = "+id+") OR (`message_to` = "+id+"))";
+                String query = "SELECT * FROM `messages` WHERE ((`message_from` = "+id+") OR (`message_to` = "+id+"))";
 		Statement st  = cn.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 List<Integer> l_id = new ArrayList<Integer>();
@@ -102,8 +110,16 @@ public class ChatServiceImpl implements ChatServiceInterface {
                     l_id.add(rs.getInt("message_to"));                  
                 }
                 l_id =  l_id.stream().distinct().filter(i->i!=id).collect(Collectors.toList());
-                ObservableList l_id_f = FXCollections.observableArrayList(l_id);
-                return l_id_f;
+                fos_userService us = new fos_userService();
+                List<fos_user> l_u = new ArrayList<fos_user>();
+                
+                for(int i=0;i<l_id.size();i++){
+                fos_user u = new fos_user();
+                u=us.get_user_by_id(l_id.get(i));
+                l_u.add(u);
+                }
+                ObservableList l_u_f = FXCollections.observableArrayList(l_u);
+                return l_u_f;
                 
     }
 
@@ -111,10 +127,25 @@ public class ChatServiceImpl implements ChatServiceInterface {
     public ObservableList<Message> getMessages(int id_user1, int id_user2) throws SQLException {
         ConnectionDb db = ConnectionDb.getInstance();
                 Connection cn = db.getCnx();
-                String query = "SELECT * FROM `message` WHERE (((`message_from` = "+id_user1+") AND (`message_to` = "+id_user2+")) OR ((`message_from` = "+id_user2+") AND (`message_to` = "+id_user1+")))";
+                String query = "SELECT * FROM `messages` WHERE (((`message_from` = "+id_user1+") AND (`message_to` = "+id_user2+")) OR ((`message_from` = "+id_user2+") AND (`message_to` = "+id_user1+")))";
 		Statement st  = cn.createStatement();
                 ResultSet rs = st.executeQuery(query);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                List<Message> l_m = new ArrayList<Message>();
+                fos_userService fs = new fos_userService();
+                while(rs.next()){
+                    Message m = new Message();  
+                    m.setContent(rs.getString("content"));
+                    m.setDate_message(rs.getDate("date_message"));
+                    m.setId_message(rs.getInt("id_message"));
+                    m.setMessage_from(fs.get_user_by_id(rs.getInt("message_from")));
+                    m.setMessage_to(fs.get_user_by_id(rs.getInt("message_to")));
+                    m.setViewed(rs.getInt("viewed"));
+                    m.setAttachment(rs.getString("attachement"));
+                    l_m.add(m);
+                }
+                ObservableList l_m_f = FXCollections.observableArrayList(l_m);
+                return l_m_f;
+        
     }
 
 }

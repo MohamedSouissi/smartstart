@@ -6,15 +6,23 @@
 package com.smartstart.controllers;
 
 import com.smartstart.entities.Opportunity;
+import com.smartstart.entities.UserSession;
+import com.smartstart.entities.fos_user;
 import com.smartstart.services.OpportunityService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -50,12 +58,16 @@ public class ShowDraftGuiController implements Initializable {
     private TableColumn<Opportunity, String> colDuration;
     @FXML
     private TableColumn<Opportunity, Date> colExpiry_Date;
+    @FXML
+    private Label Nombre_Opp;
     
     @FXML
     private Button Delete;
     @FXML
     private Button Add;
     private ObservableList<Opportunity> data;
+     OpportunityService as = new OpportunityService();
+     fos_user u=new fos_user();
 
     /**
      * Initializes the controller class.
@@ -63,11 +75,17 @@ public class ShowDraftGuiController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        OpportunityService as = new OpportunityService();
+       try {
+    u = UserSession.getInstance(new fos_user()).getUser();
+    
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeOppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        data = as.DisplayMy_OpportunitiesDrafts(1);
+        data = as.DisplayMy_OpportunitiesDrafts(u.getId());
 
-        colid_opportunity.setCellValueFactory(new PropertyValueFactory<>("id_Opp"));
+       colid_opportunity.setCellValueFactory(new PropertyValueFactory<>("id_Opp"));
+        colid_opportunity.setVisible(false);
         coljob_title.setCellValueFactory(new PropertyValueFactory<>("job_title"));
 
         coljob_category.setCellValueFactory(new PropertyValueFactory<>("job_category"));
@@ -93,6 +111,14 @@ public class ShowDraftGuiController implements Initializable {
         System.out.println(data);
 
         table.setItems(data);
+        try {
+    u = UserSession.getInstance(new fos_user()).getUser();
+    
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeOppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      int draftcount=as.CountDraft(u.getId());
+      Nombre_Opp.setText(""+draftcount);
     }    
 
     @FXML
@@ -100,6 +126,18 @@ public class ShowDraftGuiController implements Initializable {
         
         Stage stage = (Stage) CancelButton.getScene().getWindow();
         stage.close();
+        
+        FXMLLoader detail = new FXMLLoader(getClass().getResource("/com/smartstart/gui/AcceuilOpportunities.fxml"));
+            Parent root2;
+        try {
+            root2 = (Parent) detail.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root2));
+            stage1.show();
+       
+        } catch (IOException ex) {
+            Logger.getLogger(Add_OpportunitiesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -120,7 +158,10 @@ public class ShowDraftGuiController implements Initializable {
         table.getSelectionModel().getSelectedItem();
         System.out.println("Value is in this row which is selected" + table.getSelectionModel().getSelectedItem().getId_Opp());
         s.delete_opporunity(table.getSelectionModel().getSelectedItem().getId_Opp());
-        SingleOp.forEach(AllOp::remove);}
+        SingleOp.forEach(AllOp::remove);
+        int draftcount=as.CountDraft(u.getId());
+      Nombre_Opp.setText(""+draftcount);
+       }
        else
            return;
 
@@ -138,7 +179,12 @@ public class ShowDraftGuiController implements Initializable {
             alert1("PLEASE SELECT THE DRAFT THAT YOU WANT TO ADD !");
             return;
         }
-         else{
+         else{try {
+    u = UserSession.getInstance(new fos_user()).getUser();
+    
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HomeOppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
              
         OpportunityService Os=new OpportunityService();
         Os.SetDraftTo_Opp(table.getSelectionModel().getSelectedItem());

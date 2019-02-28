@@ -31,7 +31,7 @@ import javax.mail.internet.MimeMessage;
  * @author Marr
  */
 public class ApplicationService {
-
+ private ObservableList<Opportunity> ListOpp;
     private ObservableList<Application> ListeApp;
     private ObservableList<Opportunity> ListeOpp;
 
@@ -259,7 +259,7 @@ public class ApplicationService {
 
     }
 
-    public ObservableList<Application> getApplicationsByEntrepriseId(int searchedEntreprise) { //hedhi eli w7elna fiha f e5er eliil
+    public ObservableList<Application> getApplicationsByEntrepriseId(int connectedEntreprise) {
 
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
@@ -267,31 +267,27 @@ public class ApplicationService {
         ResultSet rs2 = null;
         ListeApp = FXCollections.observableArrayList();
         try {
-            String query = "select * from opportunity where id_entreprise=" + searchedEntreprise;
+            String query = "select * from application,opportunity where ((id_entreprise=" + connectedEntreprise+
+                    ") AND (application.id_opportunity=opportunity.id_opp))";
             ps = connection.prepareStatement(query);
             System.out.println(ps);
             rs = ps.executeQuery();
-            while (rs.next()) {
-
-                try {
-                    String query2 = "select * from application where id_opportunity=" + rs.getInt(1);
-                    ps2 = connection.prepareStatement(query2);
-                    System.out.println(ps);
-                    rs2 = ps2.executeQuery();
-                    while (rs2.next()) {
-
-                        ListeApp.add(new Application(rs2.getInt(1), p.getOpportunityById(rs.getInt(1)), p1.get_user_by_id(rs2.getInt(3)), rs2.getString(4)));
-
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
+            while (rs.next()) { //job title job category
+                
+                
+                Opportunity opp=new Opportunity();
+                 opp.setJob_title(rs.getString("job_title"));
+                 opp.setJob_category(rs.getString("job_category"));
+                  opp.setAdded_date(rs.getDate("added_date"));
+                   opp.setExpiry_date(rs.getDate("Expiry_date"));
+                 
+                ListeApp.add(new Application(rs.getInt(1), opp, p1.get_user_by_id(rs.getInt(3)), rs.getString(4)));
 
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        ListeApp.forEach(e -> System.out.println(e));
+      ListeApp.forEach(e -> System.out.println(e));
         return ListeApp;
 
     }
@@ -306,19 +302,26 @@ public class ApplicationService {
         ResultSet rs2 = null;
         ListeApp = FXCollections.observableArrayList();
         try {
-            String query = "select * from application where id_freelancer=" + connectedFreelancer;
+            String query = "select * from application,opportunity where ((id_freelancer=" + connectedFreelancer+
+                    ") AND (application.id_opportunity=opportunity.id_opp))";
             ps = connection.prepareStatement(query);
             System.out.println(ps);
             rs = ps.executeQuery();
             while (rs.next()) {
-
-                ListeApp.add(new Application(rs.getInt(1), p.getOpportunityById(rs.getInt(1)), p1.get_user_by_id(rs.getInt(3)), rs.getString(4)));
+                
+                
+                Opportunity opp=new Opportunity();
+                 opp.setJob_title(rs.getString("job_title"));
+                  opp.setAdded_date(rs.getDate("added_date"));
+                   opp.setExpiry_date(rs.getDate("Expiry_date"));
+                   opp.setJob_category(rs.getString("job_category"));
+                ListeApp.add(new Application(rs.getInt(1), opp, p1.get_user_by_id(rs.getInt(3)), rs.getString(4)));
 
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        ListeApp.forEach(e -> System.out.println(e));
+      ListeApp.forEach(e -> System.out.println(e));
         return ListeApp;
 
     }
@@ -402,9 +405,42 @@ public class ApplicationService {
 		catch (Exception ex ) {ex.printStackTrace();}
 		
 		}
+    
+ public ObservableList<Opportunity> searchOpps(String searchedOpps) {
+
+        PreparedStatement ps ;
+        ResultSet rs;
+         ListOpp = FXCollections.observableArrayList();
+        try {
+            String query = "select * from opportunity where `job_title`=? OR `job_category`=?" ;
+            
+            ps = connection.prepareStatement(query);
+             ps.setString(1, searchedOpps);
+             ps.setString(2, searchedOpps);
+            System.out.println(ps);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Opportunity p = new Opportunity(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getInt(6), rs.getString(7), rs.getDate(8), rs.getDate(9), rs.getInt(10));
+                ListOpp.add(p);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+         ListOpp.forEach(e -> System.out.println(e));
+        return ListOpp;
+    }		
+			
 		
-		
-	}   
+	
+ public boolean CanWithdraw(String status) {
+        if (status.equals("APPLIED"))
+            return true;
+        else return false;
+    }
+
+
+}   
 
 
 

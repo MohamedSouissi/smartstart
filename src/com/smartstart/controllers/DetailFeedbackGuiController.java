@@ -46,8 +46,8 @@ public class DetailFeedbackGuiController implements Initializable {
         Stage stage = (Stage) CancelButton.getScene().getWindow();
         stage.close();
     }
-    @FXML
-    public void AfficherDetails(Feedback f )
+    /*  @FXML
+  public void AfficherDetails(Feedback f )
     { 
                 id_app.setText(""+f.getId_application());
                 id_user.setText(""+f.getId_user());
@@ -57,7 +57,7 @@ public class DetailFeedbackGuiController implements Initializable {
         id_comment.setText(f.getComment());
         id_rating.setText(""+f.getRating());
     }
-
+*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

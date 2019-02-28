@@ -25,6 +25,8 @@ import java.time.ZoneId;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import smartstart.FXMLDocumentController;
@@ -149,20 +151,6 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
             System.out.println(ps);
             rs = ps.executeQuery();
             while (rs.next()) {
-
-                /* o.setId(rs.getInt(1));
-                 o.setJob_title(rs.getString(2));
-                    
-                    
-                 o.setJob_category(rs.getString(3));
-                 o.setJob_description(rs.getString(4));
-                 o.setBudget(rs.getFloat(5));
-                 o.setJob_draft(rs.getInt(6));
-                 o.setJob_Duration(rs.getTimestamp(7));
-                 o.setExpiry_date(rs.getDate(8));
-                 o.setAdded_date(rs.getDate(9));
-                 o.setIdEntreprise(rs.getInt(10));
-                 System.out.println("bij");*/
                 listusers.add(new fos_user(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5),rs.getInt(6), rs.getString(7), rs.getString(8), rs.getDate(9), rs.getString(10),
                         rs.getDate(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getDate(15),rs.getString(16),rs.getString(17),
                         rs.getDate(18),rs.getFloat(19),rs.getFloat(20),rs.getFloat(21),rs.getString(21)));
@@ -237,6 +225,19 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
             System.out.println(e);
         }
     }
+  public void update_passwordviamail(String mail, String newpassword) {
+        PreparedStatement ps = null;
+        try {
+            String query = "UPDATE fos_user SET `password`=? WHERE email='" + mail+"'";
+            ps = cn.prepareStatement(query);
+            ps.setString(1, newpassword);
+            System.out.println(ps);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
  public void Ajouter_skills(int idfreelancer, int idskill)
  { HasSkillService p1=new HasSkillService();
        p1.addHasSkill(idfreelancer,idskill);
@@ -262,18 +263,91 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
  }
 
  
-  public fos_user get_user_by_id(int searched ) throws SQLException
+  public fos_user get_user_by_id(int searched ) 
+  {        fos_user newus = new fos_user() ;
+   try {
+      //zid thabet
+      PreparedStatement ps=null;
+      ResultSet rs=null;
+      newus.setId(searched);
+      
+      ps = cn.prepareStatement("select * from fos_user where id="+searched);
+      rs = ps.executeQuery();
+      System.out.println("Execute statement");
+      while(rs.next())
+      {
+          newus.setUsername(rs.getString("username"));
+          newus.setUsername_canonical(rs.getString("username_canonical"));
+          newus.setEmail(rs.getString("email"));
+          newus.setEmail_canonical(rs.getString("email_canonical"));
+          newus.setEnabled(rs.getInt("enabled"));
+          newus.setSalt(rs.getString("salt"));
+          newus.setPassword(rs.getString("password"));
+          newus.setLast_login(rs.getDate("last_login"));
+          newus.setConfirmation_token(rs.getString("confirmation_token"));
+          newus.setPassword_requested_at(rs.getDate("password_requested_at"));
+          newus.setRoles(rs.getString("roles"));
+          newus.setName(rs.getString("name"));
+          newus.setLast_name(rs.getString("last_name"));
+          newus.setBirth_date(rs.getDate("Birth_date"));
+          newus.setBio(rs.getString("Bio"));
+          newus.setLocation(rs.getString("location"));
+          newus.setRegister_date(rs.getDate("Register_Date"));
+          newus.setEarnings(rs.getFloat("Earnings"));
+          newus.setExpenses(rs.getFloat("Expenses"));
+          newus.setBudget(rs.getFloat("Budget"));
+          newus.setField_company(rs.getString("field_company"));
+          //      Date birth_date, String bio,* String location, Date register_date, float earnings, float expenses, float budget, String field_company) {
+          
+          return newus;
+      }
+      //     cb.setLastName(rs.getString(3));
+      
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(fos_userService.class.getName()).log(Level.SEVERE, null, ex);
+        }return newus;
+      
+  }
+public boolean checkverif(fos_user u )
+{
+    if (u.getEnabled()==0)
+    {
+        return false;
+    }
+    else return true ;
+    
+}
+public boolean confirmAccount(fos_user u ,String code) throws SQLException
+{
+     PreparedStatement ps = null;
+    if (u.getConfirmation_token() == code)
+    {
+        String query = "UPDATE fos_user SET `enabled`=? WHERE id=" + u.getId();
+            ps = cn.prepareStatement(query);
+            ps.setInt(1, 1);
+            System.out.println(ps);
+            ps.executeUpdate();   
+            System.out.println("confirmed");
+        return true ;
+    }
+    else return false ;
+}
+
+  public fos_user get_user_by_username(String searched ) throws SQLException
   {//zid thabet
       PreparedStatement ps=null;
 	ResultSet rs=null;
         fos_user newus = new fos_user() ;
-        newus.setId(searched);
+        newus.setUsername(searched);
        
-          ps = cn.prepareStatement("select * from fos_user where id="+searched);
+        ps = cn.prepareStatement("select * from fos_user where username='"+searched+"'");
         rs = ps.executeQuery();
         System.out.println("Execute statement");
+        System.out.println(ps);
        while(rs.next()) 
        {
+           newus.setId(rs.getInt("id"));
            newus.setUsername(rs.getString("username"));
            newus.setUsername_canonical(rs.getString("username_canonical"));
            newus.setEmail(rs.getString("email"));
@@ -295,8 +369,6 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
            newus.setExpenses(rs.getFloat("Expenses"));
            newus.setBudget(rs.getFloat("Budget"));
            newus.setField_company(rs.getString("field_company"));
-           //      Date birth_date, String bio,* String location, Date register_date, float earnings, float expenses, float budget, String field_company) {
-
            return newus;
        }
    //     cb.setLastName(rs.getString(3));
@@ -304,7 +376,6 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
        return newus;
       
   }
-
     public ObservableList<fos_user> Display_users() {
 
         PreparedStatement ps = null;
@@ -383,11 +454,53 @@ Date convertToDateViaInstant(LocalDateTime dateToConvert) {
        }
        return result.toString();
    }
-   
- 
-   
-        
+    public void sendmail_password(String to,String password)
+    {  
+        try{
+            String host ="smtp.gmail.com" ;
+            String user = "smartstart1941@gmail.com";
+            String pass = "azerty1941";
+            
+            String from = "smartstart1941@gmail.com";
+            String subject = "Welcome to smartstart";
+            String messageText = "Your password is"+password;
+            boolean sessionDebug = false;
+
+            Properties props = System.getProperties();
+
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host",host);
+         //option   props.put("mail.smtp.user", user);
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.required", "true");
+            
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            Session mailSession = Session.getDefaultInstance(props, null);
+            mailSession.setDebug(sessionDebug);
+            Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress(from));
+           
+            InternetAddress[] address = {new InternetAddress(to)};
+           
+            msg.setRecipients(Message.RecipientType.TO, address);
+            msg.setSubject(subject); msg.setSentDate(new java.util.Date());
+            msg.setText(messageText);
+
+           Transport transport=mailSession.getTransport("smtp"); //serveur
+           transport.connect(host, user, pass);
+           transport.sendMessage(msg, msg.getAllRecipients());
+           transport.close();
+           System.out.println("message send successfully");
+        }catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
+
     }
+}
+   
+   
     
     
 

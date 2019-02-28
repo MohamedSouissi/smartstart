@@ -39,6 +39,8 @@ public class FXMLDocumentController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
+       
+         
     }
     
     @Override
@@ -47,10 +49,21 @@ public class FXMLDocumentController implements Initializable {
     }   
       @FXML
     private void ChangeScene(ActionEvent event) throws IOException {
-         Parent tableViewOpportunity=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/DisplayOpportunitiesGui.fxml"));
-         Scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
-         Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(tableViewOpportunityScene);
+        
+        
+            Parent tableViewOpportunity=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/AcceuilOpportunities.fxml"));
+            Scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
+            Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(tableViewOpportunityScene);
+        
+
+            
+        
+         
+
+
+    
+         
     }
     @FXML
     private void ChangeScene1(ActionEvent event) throws IOException {

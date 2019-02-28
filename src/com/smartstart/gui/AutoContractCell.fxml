@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="gridPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="titles" layoutX="7.0" layoutY="6.0" text="Contract">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="76.0" text="Freelancer Name :" />
+      <Label fx:id="username" layoutX="133.0" layoutY="76.0" prefHeight="17.0" prefWidth="160.0" text="Freelancer" />
+      <Label layoutX="14.0" layoutY="109.0" prefHeight="17.0" prefWidth="96.0" text="Job Title :" />
+      <Label fx:id="description" layoutX="133.0" layoutY="109.0" prefHeight="17.0" prefWidth="210.0" text="job title" />
+      <Button fx:id="display" layoutX="172.0" layoutY="153.0" mnemonicParsing="false" style="-fx-background-color: #7fffd4;" text="Display" />
+   </children>
+</AnchorPane>

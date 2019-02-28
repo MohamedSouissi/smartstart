@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="pane" prefHeight="700.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.QuestionCellsController">
+   <children>
+      <AnchorPane fx:id="parent" prefHeight="556.0" prefWidth="794.0" styleClass="parent" stylesheets="@stylesheet.css">
+          <children>
+            <BorderPane fx:id="bp" layoutY="6.0" prefHeight="549.0" prefWidth="794.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="60.0" style="-fx-background-color: #003f68;" BorderPane.alignment="CENTER">
+                     <children>
+                        <JFXComboBox fx:id="notif" layoutX="724.0" layoutY="10.0" prefHeight="30.0" prefWidth="78.0" promptText="notif" style="-jfx-unfocus-color: #00A2D3;" />
+                        <JFXTextField fx:id="search" layoutX="190.0" layoutY="10.0" prefHeight="30.0" prefWidth="328.0" promptText="search" />
+                        <JFXButton fx:id="accueil" layoutX="22.0" layoutY="10.0" prefHeight="30.0" text="Accueil" textFill="WHITE">
+                           <font>
+                              <Font name="Montserrat-Bold" size="15.0" />
+                           </font></JFXButton>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <center>
+                  <TabPane fx:id="crud" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                        <Tab fx:id="myQuestions" text="My Questions">
+                          <content>
+                            <AnchorPane fx:id="all" minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="802.0">
+                                 <children>
+                                    <ScrollPane fx:id="scroll1" layoutX="2.0" layoutY="63.0" prefHeight="498.0" prefViewportHeight="200.0" prefViewportWidth="200.0" prefWidth="794.0">
+                                       <content>
+                                          <JFXListView fx:id="listQ" prefHeight="495.0" prefWidth="792.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <JFXCheckBox fx:id="answered" layoutX="150.0" layoutY="27.0" onAction="#displayAnsweredQuestion" text="Answered">
+                                       <font>
+                                          <Font name="Montserrat-Regular" size="15.0" />
+                                       </font></JFXCheckBox>
+                                    <JFXCheckBox fx:id="notAnswered" layoutX="277.0" layoutY="27.0" onAction="#displayNotAnsweredQuestion" text="Not Answered">
+                                       <font>
+                                          <Font name="Montserrat-Regular" size="15.0" />
+                                       </font></JFXCheckBox>
+                                    <JFXComboBox fx:id="filter" layoutX="539.0" layoutY="23.0" onAction="#displayBySubject" prefHeight="27.0" prefWidth="161.0" promptText="filtered by subject" />
+                                    <Label fx:id="rows" alignment="CENTER" layoutX="6.0" layoutY="22.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: red;" text="0" textFill="WHITE" />
+                                    <JFXButton fx:id="qDelete" layoutX="481.0" layoutY="566.0" onAction="#onActionDelete" prefHeight="31.0" prefWidth="194.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE" />
+                                    <JFXButton fx:id="qModify" layoutX="203.0" layoutY="566.0" onAction="#onActionModify" prefHeight="31.0" prefWidth="177.0" stylesheets="@style.css" text="Modify" />
+                                    <JFXButton fx:id="CancelButton" layoutX="18.0" layoutY="565.0" onAction="#annuler" prefHeight="31.0" prefWidth="72.0" stylesheets="@style.css" text="Exit" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                      <Tab fx:id="add" text="New Question">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextArea fx:id="description" layoutX="14.0" layoutY="130.0" prefHeight="106.0" prefWidth="740.0" promptText="Describe Your Question" text="&#10;Describe Your Question&#10;">
+                                       <font>
+                                          <Font name="Montserrat-Bold" size="15.0" />
+                                       </font></TextArea>
+                                    <JFXTextField fx:id="question" layoutX="14.0" layoutY="23.0" prefHeight="27.0" prefWidth="570.0" promptText="ask ?" text="Ask" />
+                                    <JFXTextField fx:id="date" layoutX="599.0" layoutY="23.0" />
+                                    <JFXComboBox fx:id="subject" layoutX="14.0" layoutY="282.0" prefWidth="100.0" promptText="subject" />
+                                    <JFXComboBox fx:id="suggest" layoutX="14.0" layoutY="352.0" prefWidth="100.0" promptText="suggest to" />
+                                    <JFXButton fx:id="post" layoutX="469.0" layoutY="363.0" prefWidth="70.0" style="-fx-background-color: green;" stylesheets="@style.css" text="Add" />
+                                    <JFXButton fx:id="Cancel1" layoutX="586.0" layoutY="363.0" prefWidth="70.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
+                                    <JFXCheckBox fx:id="qsms" layoutX="138.0" layoutY="363.0" text="Sms" />
+                                    <JFXCheckBox fx:id="qmail" layoutX="219.0" layoutY="363.0" text="Mail" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="modify" text="My replies">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane layoutX="1.0" layoutY="43.0" prefHeight="510.0" prefViewportHeight="200.0" prefViewportWidth="626.0" prefWidth="794.0">
+                                       <content>
+                                          <JFXListView fx:id="listR" prefHeight="507.0" prefWidth="792.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <JFXButton fx:id="bModify" layoutX="229.0" layoutY="559.0" onAction="#VerifyAndModify" prefHeight="31.0" prefWidth="140.0" stylesheets="@style.css" text="Modify" textFill="WHITE" />
+                                    <JFXButton fx:id="bDelete" layoutX="404.0" layoutY="559.0" onAction="#VerifyAndDelete" prefHeight="31.0" prefWidth="153.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE" />
+                                    <Label fx:id="rrows" alignment="CENTER" layoutX="24.0" layoutY="10.0" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: red;" text="0" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </center>
+            </BorderPane>
+          </children>
+      </AnchorPane>
+   </children>
+</StackPane>

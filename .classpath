@@ -6,5 +6,32 @@
 	<classpathentry kind="lib" path="dist/lib/mail.jar"/>
 	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-5.1.23-bin.jar"/>
 	<classpathentry kind="lib" path="dist/SmartStart.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/Bulk_SMS_Library.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/controlsfx-8.40.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/fontawesomefx-commons-9.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/fontawesomefx-controls-9.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/fontawesomefx-glyphsbrowser-1.3.0 - Copy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/fontawesomefx-glyphsbrowser-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/itextpdf-5.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/JavaWebSockets.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/jetty-http-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/jetty-io-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/jetty-server-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/jetty-util-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/json-20180813.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/servlet-api-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/stripe-java-4.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/websocket-api-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/websocket-common-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/websocket-server-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jars/websocket-servlet-9.0.2.v20130417.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diabl/Desktop/jfoenix.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

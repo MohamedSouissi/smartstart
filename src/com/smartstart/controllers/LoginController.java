@@ -27,7 +27,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import com.smartstart.entities.fos_user;
+import com.smartstart.entities.UserSession;
 
 /**
  * FXML Controller class
@@ -41,7 +42,7 @@ public class LoginController implements Initializable {
     @FXML
     private ImageView imgProgress;
     @FXML
-    private TextField username;
+    public TextField username;
     @FXML
     private TextField password;
     @FXML
@@ -50,6 +51,10 @@ public class LoginController implements Initializable {
     private Label isconnected;
     @FXML
     private Hyperlink Newaccount;
+    
+    public fos_user selected_user = new fos_user();
+    @FXML
+    private Hyperlink pass_forgot;
     
     /**
      * Initializes the controller class.
@@ -60,50 +65,35 @@ public class LoginController implements Initializable {
     }    
 
      @FXML
-    private void login(ActionEvent event) throws SQLException, IOException  {
+    private void login(ActionEvent event) throws SQLException, IOException, InterruptedException, ClassNotFoundException  {
           ConnectionDb db = ConnectionDb.getInstance();
                 Connection cn = db.getCnx();
                 PreparedStatement ps=null;
-         //       System.out.println("CI BON ");
-     /*   if (username.getText() =="yes" && password.getText()=="yes")
-           { System.out.println("YES");
-                    isconnected.setText("YES");} */ //les {PROBLEM}
+             
           fos_userService fss = new fos_userService();
-       
          if (fss.Authentification(username.getText(), password.getText()))
          {
              System.out.println("EY");
-             isconnected.setText("connectééééééé");
-            Parent tableViewOpportunity=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/Freelancerconnected.fxml"));
-         Scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
-         Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
-         window.setScene(tableViewOpportunityScene);
-             
-             
-             // scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
-            // Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
-             //window.setScene(tableViewOpportunityScene);
+             isconnected.setText("connecté");
+         
+         
+       
+            if (UserSession.getInstance(fss.get_user_by_username(username.getText())).getUser().getRoles().equals("entreprise")){
+                  Parent Opp=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/AcceuilOpportunities.fxml"));
+            Scene oppScene=new Scene (Opp);
+            Stage window1=(Stage)((Node)event.getSource()).getScene().getWindow();
+            window1.setScene(oppScene);
+            }
+            
+            if (UserSession.getInstance(fss.get_user_by_username(username.getText())).getUser().getRoles().equals("freelancer")){
+                  Parent Opp=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/AcceuilAllOpportunities.fxml"));
+            Scene oppScene=new Scene (Opp);
+            Stage window1=(Stage)((Node)event.getSource()).getScene().getWindow();
+            window1.setScene(oppScene);
+            }
              
          }
          else isconnected.setText("introuvable");
-         
-       /*      try {
-                      Statement statement = cn.createStatement();
-                      String sql ="SELECT * FROM `fos_user` WHERE username = "+username.getText()+" and password = "+password.getText();
-                      System.out.println(sql);
-                   //   ps=cn.prepareStatement(sql);
-                      ResultSet rs = statement.executeQuery(sql);
-                      System.out.println(rs);
-                      while (rs.next())
-                      
-                          System.out.println("CI BON ");
-                          isconnected.setText("connecteey");
-                      
-                     //isconnected.setText("LAAAAAAA");
-                     System.out.println("LA");
-        } catch (Exception e) {
-        } */
-        
     }
 
     
@@ -114,8 +104,14 @@ public class LoginController implements Initializable {
          Scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
          Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
          window.setScene(tableViewOpportunityScene);
-        
-        
+    }
+
+    @FXML
+    private void forgot(ActionEvent event) throws IOException {
+        Parent tableViewOpportunity=FXMLLoader.load(getClass().getResource("/com/smartstart/gui/forgot.fxml"));
+         Scene tableViewOpportunityScene=new Scene (tableViewOpportunity);
+         Stage window=(Stage)((Node)event.getSource()).getScene().getWindow();
+         window.setScene(tableViewOpportunityScene);
     }
     
 }

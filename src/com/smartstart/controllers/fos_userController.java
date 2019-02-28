@@ -17,13 +17,13 @@ import java.sql.SQLException;
 import java.util.Base64;
 import javafx.scene.control.TableView;
 import javax.xml.bind.DatatypeConverter;
-
+import com.smartstart.entities.UserSession;
 /**
  *
  * @author Marr
  */
 public class fos_userController {
-     public static void main(String[] args) throws ParseException, SQLException {
+     public static void main(String[] args) throws ParseException, SQLException, ClassNotFoundException {
    Date last_log = null;
     Date birthDAT = null;
     Date register_date = null;
@@ -37,6 +37,7 @@ public class fos_userController {
                 password_requested_at,"freelancarji","minax","3edel", birthDAT,"bio","location",
                 register_date, 1, 2, 3,"field_company") ;
            fos_userService fss = new fos_userService();
+           
           
           
          System.out.println("dsdsd");
@@ -48,8 +49,8 @@ public class fos_userController {
         String encoded = DatatypeConverter.printBase64Binary(us1.getPassword().getBytes());
         System.out.println("encoded value is \t" + encoded);
 
-        // Decode data 
-        String decoded = new String(DatatypeConverter.parseBase64Binary(encoded));
+        // Decode data //BCryptf 
+       String decoded = new String(DatatypeConverter.parseBase64Binary(encoded));
         System.out.println("decoded value is \t" + decoded);
 
         System.out.println("original value is \t" + str);
@@ -57,6 +58,14 @@ public class fos_userController {
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");  
 Date date = new Date(System.currentTimeMillis());  
 System.out.println(formatter.format(date));  
+       //  System.out.println(fss.get_user_by_id(2).getUsername());
+       // UserSession.getInstance(us2).getUser().getUsername();
+         System.out.println( fss.get_user_by_username("Adel").getEmail());
+         fss.update_passwordviamail("marouene.dakhlaoui@esprit.tn", fss.random_code(3));
+      //   System.out.println(fss.random_code(2));
+        // System.out.println(UserSession.getInstance(us2).getUser().getUsername());
+       
+//  System.out.println(fss.get_user_by_username("Adel").getUsername());
 //code random
         // System.out.println(fss.random_code(7));
     //test email     fss.sendmail("marouene.dakhlaoui@esprit.tn","s");

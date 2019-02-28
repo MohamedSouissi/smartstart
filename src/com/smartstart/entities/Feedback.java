@@ -13,23 +13,25 @@ import java.util.Date;
  */
 public class Feedback {
     private int id_feedback;
-    private int id_user;
+    private fos_user user;
     private float Rating;
     private String comment;
     private Date added_date;
-    private int id_application;
+    private Application application;
     
 
    public Feedback(){
-   
+   application=new Application();
+   user = new fos_user();
+   added_date = new Date();
    }
-   public Feedback(int id_feedback,int id_user ,float Rating ,String comment,Date added_date,int id_application){
+   public Feedback(int id_feedback,fos_user user ,float Rating ,String comment,Date added_date,Application application){
        this.id_feedback=id_feedback;
-       this.id_user=id_user;
+       this.user=user;
        this.Rating=Rating;
        this.comment=comment;
        this.added_date=added_date;
-       this.id_application=id_application;
+       this.application=application;
         
        
    
@@ -43,12 +45,12 @@ public class Feedback {
         this.id_feedback = id_feedback;
     }
 
-    public int getId_user() {
-        return id_user;
+    public fos_user getUser() {
+        return user;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setUser(fos_user user) {
+        this.user = user;
     }
 
     public float getRating() {
@@ -75,12 +77,12 @@ public class Feedback {
         this.added_date = added_date;
     }
 
-    public int getId_application() {
-        return id_application;
+    public Application getApplication() {
+        return application;
     }
 
-    public void setId_application(int id_application) {
-        this.id_application = id_application;
+    public void setApplication(Application application) {
+        this.application = application;
     }
     
     

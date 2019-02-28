@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.control.GlyphCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="plan" prefHeight="125.0" prefWidth="728.0" style="-fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+         <children>
+            <Label fx:id="vote" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="27.0" prefWidth="60.0" text="0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <ScrollPane layoutX="66.0" layoutY="32.0" prefHeight="91.0" prefWidth="652.0">
+               <content>
+                  <Label fx:id="reply" alignment="TOP_LEFT" prefHeight="89.0" prefWidth="650.0" />
+               </content>
+            </ScrollPane>
+            <Separator layoutX="65.0" layoutY="29.0" prefHeight="4.0" prefWidth="652.0" />
+            <JFXButton fx:id="replier" layoutX="74.0" layoutY="1.0" prefHeight="29.0" prefWidth="132.0" text="Name Replier">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font></JFXButton>
+            <JFXButton fx:id="up" layoutX="5.0" layoutY="1.0" prefWidth="60.0" text="Up">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font></JFXButton>
+            <JFXButton fx:id="down" layoutX="-3.0" layoutY="95.0" prefHeight="29.0" prefWidth="70.0" text="Down">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font></JFXButton>
+            <Label fx:id="date" layoutX="637.0" layoutY="1.0" prefHeight="27.0" prefWidth="88.0" text="Date">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font></Label>
+            <Separator layoutX="62.0" orientation="VERTICAL" prefHeight="125.0" prefWidth="1.0" />
+            <GlyphCheckBox fx:id="theAnswer" layoutX="338.0" layoutY="1.0" prefHeight="27.0" prefWidth="95.0" text="Satified">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font></GlyphCheckBox>
+         </children>
+         <padding>
+            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+         </padding>
+      </AnchorPane>

@@ -18,8 +18,11 @@ public interface FeedbackServiceInterface {
     
     public void addFeedback(Feedback f) throws SQLException;
     public List<Feedback> listerFeedback (int id) throws SQLException;
-     public void removeFeedback(int id) throws SQLException ;
+    public List<Feedback> listerFeedbackByApp (int id) throws SQLException;
+    public void removeFeedback(int id) throws SQLException ;
       public void updateFeedback(Feedback f) throws SQLException ;
+          public int CountFeedbacks(int id_user);
+
 
    
     

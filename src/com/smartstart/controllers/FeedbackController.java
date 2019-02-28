@@ -228,7 +228,7 @@ public class FeedbackController implements Initializable {
             System.out.println(table.getSelectionModel().getSelectedItem());
             stage.setScene(new Scene(root1));
             stage.show();
-           f.AfficherDetails(table.getSelectionModel().getSelectedItem());
+        //   f.AfficherDetails(table.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

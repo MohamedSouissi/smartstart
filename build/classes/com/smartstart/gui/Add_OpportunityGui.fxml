@@ -1,67 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.fxml.FXMLLoader?>
 
-<AnchorPane fx:id="parent" prefHeight="556.0" prefWidth="713.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.Add_OpportunitiesController">
+<AnchorPane fx:id="parent" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="691.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.Add_OpportunitiesController">
     <children>
-      <BorderPane prefHeight="364.0" prefWidth="721.0" AnchorPane.bottomAnchor="192.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="854.0" AnchorPane.bottomAnchor="553.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <Pane prefHeight="272.0" prefWidth="787.0" BorderPane.alignment="CENTER">
+            <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="722.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="job_title" layoutX="40.0" layoutY="38.0" promptText="Job Title" />
-                  <TextArea fx:id="job_description" layoutX="34.0" layoutY="182.0" prefHeight="143.0" prefWidth="290.0" promptText="Job Description" />
-                  <DatePicker fx:id="Expiry_Date" layoutX="446.0" layoutY="139.0" promptText="Expiry Date" />
-                  <ComboBox fx:id="Needed_skills" layoutX="465.0" layoutY="38.0" prefWidth="150.0" promptText="Needed Skills" />
-                  <Button fx:id="Save_and_exit" layoutX="481.0" layoutY="393.0" mnemonicParsing="false" onAction="#SaveOpportunityAndExit" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: green;" stylesheets="@stylesheet.css" text="Save And Exit" textFill="WHITE">
+                  <TextField fx:id="job_title" layoutX="34.0" layoutY="119.0" promptText="Job Title">
+                     <font>
+                        <Font name="Montserrat-Bold" size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextArea fx:id="job_description" layoutX="34.0" layoutY="188.0" prefHeight="143.0" prefWidth="290.0" promptText="Job Description">
+                     <font>
+                        <Font name="Montserrat-Bold" size="12.0" />
+                     </font></TextArea>
+                  <Button fx:id="Save_and_exit" layoutX="481.0" layoutY="381.0" mnemonicParsing="false" onAction="#SaveOpportunityAndExit" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: green;" stylesheets="@stylesheet.css" text="Save And Exit" textFill="WHITE">
                      <cursor>
                         
                      </cursor>
+                     <font>
+                        <Font name="Montserrat-Bold" size="12.0" />
+                     </font>
                   </Button>
-                  <TextField fx:id="Job_category" layoutX="40.0" layoutY="105.0" promptText="Job Category" />
-                  <Separator layoutX="370.0" layoutY="30.0" orientation="VERTICAL" prefHeight="293.0" prefWidth="3.0" />
-                  <Separator layoutX="373.0" layoutY="28.0" orientation="VERTICAL" prefHeight="297.0" prefWidth="5.0" style="-fx-background-color: #00A2D3;" />
+                  <TextField fx:id="Job_category" layoutX="35.0" layoutY="154.0" promptText="Job Category">
+                     <font>
+                        <Font name="Montserrat-Bold" size="12.0" />
+                     </font></TextField>
+                  <Separator layoutX="353.0" layoutY="100.0" orientation="VERTICAL" prefHeight="248.0" prefWidth="6.0" />
+                  <Separator layoutX="373.0" layoutY="10.0" opacity="0.0" orientation="VERTICAL" prefHeight="297.0" prefWidth="5.0" style="-fx-background-color: #05071F;" />
                </children>
             </Pane>
-         </center>
-         <top>
-            <Label fx:id="type" alignment="CENTER" prefHeight="92.0" prefWidth="853.0" style="-fx-background-color: #00A2D3;" styleClass="card-01" stylesheets="@stylesheet.css" text="Add An Opportunity" textFill="#f2e4e4" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-         </top></BorderPane>
-      <Button fx:id="Add_Opportunity" layoutX="276.0" layoutY="485.0" mnemonicParsing="false" onAction="#Add_OpportunityToDb" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="Add Opportunity" textFill="WHITE">
+         </center></BorderPane>
+      <Button fx:id="Add_Opportunity" layoutX="276.0" layoutY="382.0" mnemonicParsing="false" onAction="#Add_OpportunityToDb" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="Add Opportunity" textFill="WHITE">
          <cursor>
            
          </cursor>
+         <font>
+            <Font name="Montserrat-Bold" size="12.0" />
+         </font>
       </Button>
-      <TextField fx:id="Budget" layoutX="448.0" layoutY="333.0" prefHeight="31.0" prefWidth="219.0" promptText="Budget" />
-      <Separator layoutX="2.0" layoutY="449.0" prefHeight="7.0" prefWidth="713.0" />
-      <Button fx:id="CancelButton" layoutX="66.0" layoutY="485.0" mnemonicParsing="false" onAction="#annuler" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: red;" stylesheets="@stylesheet.css" text="Cancel" textFill="WHITE">
+      <TextField fx:id="Budget" layoutX="420.0" layoutY="234.0" prefHeight="31.0" prefWidth="219.0" promptText="Budget">
+         <font>
+            <Font name="Montserrat-Bold" size="12.0" />
+         </font></TextField>
+      <Separator layoutY="362.0" prefHeight="6.0" prefWidth="691.0" />
+      <Button fx:id="CancelButton" layoutX="66.0" layoutY="381.0" mnemonicParsing="false" onAction="#annuler" prefHeight="40.0" prefWidth="162.0" style="-fx-background-color: red;" stylesheets="@stylesheet.css" text="Cancel" textFill="WHITE">
          <cursor>
           
          </cursor>
+         <font>
+            <Font name="Montserrat-Bold" size="12.0" />
+         </font>
       </Button>
+      <Label fx:id="type" alignment="CENTER" layoutY="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="691.0" style="-fx-background-color: #05071F;" styleClass="card-01" stylesheets="@stylesheet.css" text="Add An Opportunity" textFill="#f2e4e4">
+         <font>
+            <Font name="Montserrat-Regular" size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="468.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="87.0" prefWidth="100.0">
+         <children>
+            <TextField fx:id="Needed_skills" promptText="Needed Skill">
+               <font>
+                  <Font name="Montserrat-Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Needed_skills1" promptText="Needed Skill">
+               <font>
+                  <Font name="Montserrat-Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="Needed_skills2" promptText="Needed Skill">
+               <font>
+                  <Font name="Montserrat-Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+      <DatePicker fx:id="Expiry_Date" layoutX="420.0" layoutY="284.0" prefHeight="25.0" prefWidth="219.0" promptText="Expiry Date" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="199.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons8_Box_32px.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

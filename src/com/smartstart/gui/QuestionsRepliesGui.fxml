@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="replyAnchor" prefHeight="681.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.QuestionsRepliesController">
+   <children>
+      <BorderPane prefHeight="681.0" prefWidth="745.0">
+         <center>
+            <VBox prefHeight="600.0" prefWidth="744.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="110.0" prefWidth="745.0" style="-fx-background-color: #003f68;">
+                           <children>
+                              <Label fx:id="description" alignment="TOP_LEFT" graphicTextGap="5.0" layoutX="10.0" layoutY="33.0" prefHeight="64.0" prefWidth="600.0" text="Describe" textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="Montserrat-Regular" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="question" layoutX="11.0" layoutY="4.0" prefHeight="27.0" prefWidth="600.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Montserrat-Bold" size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="views" alignment="CENTER" contentDisplay="CENTER" layoutX="591.0" layoutY="14.0" prefHeight="27.0" prefWidth="129.0" text="0" textFill="WHITE" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <JFXListView fx:id="listreply" prefHeight="502.0" prefWidth="744.0" style="-fx-background-insets: 1; -jfx-vertical-gap: 10;" />
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox prefHeight="81.0" prefWidth="738.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="81.0" prefWidth="738.0">
+                     <children>
+                        <JFXTextArea fx:id="content" layoutX="10.0" layoutY="4.0" prefHeight="74.0" prefWidth="562.0" promptText="Reply this question" />
+                        <JFXButton fx:id="reply" layoutX="576.0" layoutY="14.0" onAction="#makeReply" prefHeight="31.0" prefWidth="72.0" stylesheets="@style.css" text="Reply" textFill="WHITE" />
+                        <JFXButton fx:id="cancel" layoutX="656.0" layoutY="14.0" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
+                        <Label fx:id="rows" contentDisplay="CENTER" layoutX="589.0" layoutY="49.0" prefHeight="27.0" prefWidth="135.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

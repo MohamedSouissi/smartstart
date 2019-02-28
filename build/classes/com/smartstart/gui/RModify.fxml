@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="262.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartstart.controllers.RModifyController">
+   <children>
+      <TextArea fx:id="reply" layoutX="13.0" layoutY="17.0" prefHeight="200.0" prefWidth="573.0" />
+      <JFXButton fx:id="modify" layoutX="244.0" layoutY="224.0" prefHeight="31.0" prefWidth="119.0" stylesheets="@style.css" text="Modify" />
+   </children>
+</AnchorPane>

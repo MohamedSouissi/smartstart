@@ -1,27 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="198.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="titles" layoutX="19.0" layoutY="10.0" prefHeight="58.0" prefWidth="234.0" text="Job Title" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="531.0" AnchorPane.topAnchor="10.0">
+      <Label fx:id="category" layoutX="450.0" layoutY="36.0" text="Job Category">
          <font>
-            <Font name="System Bold Italic" size="29.0" />
+            <Font name="Montserrat-Bold" size="10.0" />
          </font></Label>
-      <Label fx:id="category" layoutX="223.0" layoutY="28.0" text="Job Category" />
-      <Label fx:id="description" layoutX="73.0" layoutY="115.0" prefHeight="76.0" prefWidth="234.0" text="Job Description" />
-      <Label fx:id="Expiry" layoutX="557.0" layoutY="41.0" text="Expiry Date" />
-      <Separator layoutX="389.0" layoutY="12.0" orientation="VERTICAL" prefHeight="154.0" prefWidth="6.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="12.0" />
-      <Label fx:id="Expiry1" layoutX="558.0" layoutY="121.0" text="Added Date" />
-      <Label fx:id="description1" layoutX="66.0" layoutY="79.0" text="Fixed Price :" />
-      <Label fx:id="budget" layoutX="175.0" layoutY="79.0" text="Budget" />
-      <Label layoutX="460.0" layoutY="41.0" text="Expiry Date" />
-      <Label layoutX="460.0" layoutY="121.0" text="Added Date" />
+      <Label layoutX="70.0" layoutY="53.0" prefHeight="30.0" prefWidth="95.0" text="Job Description:">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font></Label>
+      <Label fx:id="Expiry" layoutX="699.0" layoutY="35.0" text="Expiry Date">
+         <font>
+            <Font name="Montserrat-Bold" size="10.0" />
+         </font></Label>
+      <Label fx:id="Expiry1" layoutX="699.0" layoutY="61.0" text="Added Date">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font></Label>
+      <Label fx:id="description1" layoutX="373.0" layoutY="61.0" text="Fixed Price :">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font></Label>
+      <Label fx:id="budget" layoutX="451.0" layoutY="60.0" text="Budget">
+         <font>
+            <Font name="Montserrat-Bold" size="10.0" />
+         </font></Label>
+      <Label layoutX="616.0" layoutY="35.0" text="Expiry Date:">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font></Label>
+      <Label layoutX="616.0" layoutY="62.0" text="Added Date">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font></Label>
+      <Label layoutX="369.0" layoutY="36.0" text="Job Category:">
+         <font>
+            <Font name="Montserrat-Regular" size="10.0" />
+         </font></Label>
+      <Label fx:id="description" layoutX="162.0" layoutY="53.0" prefHeight="30.0" prefWidth="242.0" text="Job Description:">
+         <font>
+            <Font name="Montserrat-Bold" size="10.0" />
+         </font></Label>
+      <Label fx:id="titles" layoutX="144.0" layoutY="11.0" prefHeight="38.0" prefWidth="174.0" text="Job Title">
+         <font>
+            <Font name="Montserrat-Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="titles1" layoutX="70.0" layoutY="15.0" prefHeight="30.0" prefWidth="73.0" text="Job Title:">
+         <font>
+            <Font name="Montserrat-Regular" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="image" fitHeight="45.0" fitWidth="48.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/grasp-skills-bulb-icon-animation-loop.gif" />
+         </image>
+      </ImageView>
+      <Button fx:id="complaint" layoutX="610.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="153.0" stylesheets="@style.css" text="Add Complaint" textFill="WHITE">
+         <font>
+            <Font name="Montserrat-Regular" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

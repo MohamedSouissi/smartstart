@@ -40,9 +40,9 @@ public class OpportunityController {
  java.sql.Date date = new java.sql.Date(utilDate.getTime());
 
     
-       Opportunity O=new Opportunity(1,"AddedJob","Mobile","android studio",400,0,"44",d,d,1);
-       Opportunity O1=new Opportunity(1,"fathi","larou","larou",400,0,"44",date,date,1);
-       p1.create_Opportunity(O,1);
+      // Opportunity O=new Opportunity(1,"AddedJob","Mobile","android studio",400,0,"44",d,d,1);
+      // Opportunity O1=new Opportunity(1,"fathi","larou","larou",400,0,"44",date,date,1);
+       //p1.create_Opportunity(O,1);
        //p1.delete_opporunity(5);
        //p1.update_opportunity(O1,2);
         

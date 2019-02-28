@@ -1,6 +1,8 @@
 package com.smartstart.services;
 
 import com.smartstart.entities.Opportunity;
+import com.smartstart.entities.fos_user;
+import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.ObservableList;
 
@@ -32,9 +34,19 @@ public interface OpporunityServiceInterface {
     ObservableList<Opportunity> DisplayMy_OpportunitiesDrafts(int id_user);
 
     public void SetDraftTo_Opp(Opportunity o);
-          public ObservableList<Opportunity> getOpportunitiesFromApplications(int id_opp);
-            public Opportunity getOpportunityById(int id_opp);
 
-    
+    public ObservableList<Opportunity> getOpportunitiesFromApplications(int id_opp);
+
+    public Opportunity getOpportunityById(int id_opp);
+
+    public void sendAcceptanceToUser(String mail, String appName) throws SQLException;
+
+    public fos_user getUserByIdOpp(int id_op);
+     public int CountDraft (int id_user);
+    public int CountOpportunities (int id_user);
+    public int CountApplication (int id_app);
+    public int CountAppliedApp (int id_user);
+   
+
 
 }

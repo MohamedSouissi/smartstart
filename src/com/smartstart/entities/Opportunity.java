@@ -6,6 +6,8 @@
 package com.smartstart.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
@@ -14,7 +16,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class Opportunity {
 
-    private SimpleIntegerProperty id_opp;
+    private int id_opp;
     private String job_title;
     private String job_category;
     private String job_description;
@@ -23,9 +25,13 @@ public class Opportunity {
     private String job_duration;
     private Date Expiry_Date;
     private Date added_date;
-    private Integer id_entreprise;
+    private fos_user u;
+    private ArrayList<Skill> s;
+
+    
 
     public Opportunity() {
+        u=new fos_user();
     }
 
     public Opportunity(String job_title, String job_category, String job_description, float budget, int job_Draft, Date Expiry_Date,Integer id_entreprise) {
@@ -36,7 +42,9 @@ public class Opportunity {
         this.budget = budget;
         this.job_Draft = job_Draft;
         this.Expiry_Date = Expiry_Date;
-        this.id_entreprise = id_entreprise;
+       
+        s=new ArrayList<>();
+        
     }
 
     public Opportunity(String j, String j1, String j2, float b) {
@@ -47,7 +55,7 @@ public class Opportunity {
     }
 
     public Opportunity(int id_opp, String job_title, String job_category, String job_description, float budget, int job_draft, String job_duration, Date Expiry_date, Date Added_date, int id_entreprise) {
-        this.id_opp = new SimpleIntegerProperty(id_opp);
+        this.id_opp = id_opp;
         this.job_title = job_title;
         this.job_category = job_category;
         this.job_description = job_description;
@@ -55,7 +63,7 @@ public class Opportunity {
         this.job_duration = job_duration;
         this.Expiry_Date = Expiry_date;
         this.added_date = Added_date;
-        this.id_entreprise = id_entreprise;
+        
         this.job_Draft = job_draft;
     }
     public Opportunity (String job_title,String job_category,String description,Date fin,Float Bu)
@@ -67,13 +75,21 @@ public class Opportunity {
         this.budget=Bu;
     }
 
+    public Opportunity(int aInt, String string, String string0, String string1, float aFloat, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Opportunity(int aInt, String string, String string0, String string1, float aFloat, int aInt0, String string2, Date date, Date date0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     public int getId_Opp() {
-        return id_opp.get();
+        return id_opp;
     }
 
     public void setId(int id_opp) {
-        this.id_opp.set(id_opp);
+        this.id_opp=id_opp;
     }
 
     public String getJob_title() {
@@ -140,17 +156,19 @@ public class Opportunity {
         this.job_duration = d;
     }
 
-    public int getId_Entreprise() {
-        return id_entreprise;
+ 
+    public fos_user getUser() {
+        return user;
     }
 
-    public void setIdEntreprise(int id) {
-        this.id_entreprise = id;
+    public void setUser(fos_user user) {
+        this.user = user;
     }
+    private fos_user user;
 
     @Override
     public String toString() {
-        return "id opp :" + id_opp + " Job Title :" + job_title + " Job Category : " + job_category + " Job Description : " + job_description + " Budget : " + budget + " Draft : " + job_Draft + " Job Duration :" + job_duration + " Expiry Date : " + Expiry_Date + " Added Date : " + added_date + "Id Entreprise : " + id_entreprise;
+        return "id opp :" + id_opp + " Job Title :" + job_title + " Job Category : " + job_category + " Job Description : " + job_description + " Budget : " + budget + " Draft : " + job_Draft + " Job Duration :" + job_duration + " Expiry Date : " + Expiry_Date + " Added Date : " + added_date ;
     }
 
 }

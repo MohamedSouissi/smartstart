@@ -6,6 +6,7 @@
 package com.smartstart.services;
 
 import com.smartstart.entities.Contract;
+import com.smartstart.entities.Opportunity;
 import com.smartstart.entities.fos_user;
 import com.smartstart.util.ConnectionDb;
 import java.sql.Connection;
@@ -15,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,15 +35,17 @@ public class ContractServiceImpl implements ContractServiceInterface {
     public void addContract(Contract c) throws SQLException {
         ConnectionDb db = ConnectionDb.getInstance();
         Connection cn = db.getCnx();
-        String query = "INSERT INTO `contract`(payment_method, Start_date, finish_date, sum, id_application) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO `contract`(payment_method, Start_date, finish_date, sum, prio, id_application) VALUES (?,?,?,?,?,?)";
         PreparedStatement st = cn.prepareStatement(query);
         st.setString(1, c.getPayment_method());
         java.sql.Date dateS = new java.sql.Date(c.getStart_date().getTime());
         st.setString(2, dateS.toString());
         java.sql.Date dateF = new java.sql.Date(c.getStart_date().getTime());
         st.setString(3, dateF.toString());
-        st.setString(4, "" + c.getSum());
-        st.setString(5, "" + c.getId_application());
+        st.setString(4,String.valueOf(c.getSum()));
+        st.setInt(5,c.getPrio());
+        st.setInt(6,9);
+        
         st.execute();
     }
 
@@ -48,14 +53,16 @@ public class ContractServiceImpl implements ContractServiceInterface {
     public void updateContract(Contract c) throws SQLException {
         ConnectionDb db = ConnectionDb.getInstance();
         Connection cn = db.getCnx();
-        String query = "UPDATE `contract` SET `Start_date`=?,`finish_date`=?,`sum`=? WHERE `id_contract` = " + c.getId_contract();
+        String query = "UPDATE `contract` SET `Start_date`=?,`finish_date`=?,`sum`=?,`prio`=?,`payment_method`=? WHERE `id_contract` = " + c.getId_contract();
         PreparedStatement st = cn.prepareStatement(query);
         java.sql.Date dateS = new java.sql.Date(c.getStart_date().getTime());
         st.setString(1, dateS.toString());
         java.sql.Date dateF = new java.sql.Date(c.getStart_date().getTime());
-        st.setString(3, dateF.toString());
-        st.setString(4, "" + c.getSum());
-        st.execute();
+        st.setString(2, dateF.toString());
+        st.setString(3,String.valueOf(c.getSum()));
+        st.setInt(4,c.getPrio());
+        st.setString(5,c.getPayment_method());
+        st.executeUpdate();
     }
 
     @Override
@@ -68,47 +75,41 @@ public class ContractServiceImpl implements ContractServiceInterface {
     }
 
     @Override
-    public ObservableList<Contract> listContract(int idEntreprise) throws SQLException {
+    public ObservableList<Contract> listContract(int idEntreprise)   {
+        List<Contract> lc = new ArrayList<Contract>();
+        try {
         ConnectionDb db = ConnectionDb.getInstance();
         Connection cn = db.getCnx();
-        String query = "SELECT * FROM `contract`,`application`,`opportunity` WHERE ((contract.id_application = application.id_application) AND (application.id_opportunity = opportunity.id_opp) AND (opportunity.id_entreprise = " + idEntreprise + "))";
+        String query = "SELECT * FROM `contract`,`application`,`opportunity` WHERE ((contract.id_application = application.id_application) AND (application.id_opportunity = opportunity.id_opp) AND (opportunity.id_entreprise = " + idEntreprise + ") AND (contract.prio=1))";
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(query);
-        List<Contract> lc = new ArrayList<Contract>();
-        Contract c = new Contract();
-        fos_user f = new fos_user();
+        
         while (rs.next()) {
-            c.setId_contract(rs.getInt("id_contract"));
-            c.setPayment_method(rs.getString("payment_method"));
-            c.setStart_date(rs.getDate("Start_date"));
-            c.setFinish_date(rs.getDate("finish_date"));
-            c.setSum(rs.getFloat("sum"));
-            c.setId_application(rs.getInt("id_application"));
-            c.setDescription(rs.getString("opportunity.job_description"));
-            fos_userService us = new fos_userService();
-            f=us.get_user_by_id(rs.getInt("application.id_freelancer"));
-            c.setFreelancer(f.getUsername());
-            lc.add(c);
+                Contract c = new Contract();
+                c.setId_contract(rs.getInt("id_contract"));
+                c.setPayment_method(rs.getString("payment_method"));
+                c.setStart_date(rs.getDate("Start_date"));
+                c.setFinish_date(rs.getDate("finish_date"));
+                c.setSum(rs.getFloat("sum"));
+                c.getApplication().setId(rs.getInt("id_application"));
+                OpportunityService os=new OpportunityService();
+                Opportunity o = os.Display_One_Opportunity(rs.getInt("id_opp"));
+                c.getApplication().setOpportunity(o);
+                //c.getApplication().getOpportunity().setJob_description(rs.getString("opportunity.job_description"));               
+                fos_userService us = new fos_userService();
+                fos_user u = us.get_user_by_id(rs.getInt("application.id_freelancer"));
+                c.getUser().setUsername(u.getUsername());
+                c.getUser().setId(u.getId());
+                c.setPrio(rs.getInt("prio"));
+                lc.add(c);
         }
+            } catch (SQLException ex) {
+                Logger.getLogger(ContractServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         ObservableList lcf = FXCollections.observableArrayList(lc);
         return lcf;
 
-    }
-
-    @Override
-    public List<Contract> listContractOrdred(int idEntreprise) throws SQLException {
-        List<Contract> lco = listContract(idEntreprise);
-        lco = lco.stream().sorted((a, b) -> {
-            if (a.getId_contract() > b.getId_contract()) {
-                return 1;
-            }
-            if (a.getId_contract() < b.getId_contract()) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }).collect(Collectors.toList());
-        return lco;
     }
 
     @Override
@@ -131,5 +132,92 @@ public class ContractServiceImpl implements ContractServiceInterface {
         }
         return toretrun;
     }
+
+    @Override
+    public ObservableList<Contract> listContractFreelancer(int idfreelancer) throws SQLException {
+        List<Contract> lc = new ArrayList<Contract>();
+        try {
+        ConnectionDb db = ConnectionDb.getInstance();
+        Connection cn = db.getCnx();
+        String query = "SELECT * FROM `contract`,`application`,`opportunity` WHERE ((contract.id_application = application.id_application) AND (application.id_opportunity = opportunity.id_opp) AND (application.id_freelancer = " + idfreelancer + ") AND (contract.prio=1))";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        
+        while (rs.next()) {
+                Contract c = new Contract();
+                c.setId_contract(rs.getInt("id_contract"));
+                c.setPayment_method(rs.getString("payment_method"));
+                c.setStart_date(rs.getDate("Start_date"));
+                c.setFinish_date(rs.getDate("finish_date"));
+                c.setSum(rs.getFloat("sum"));
+                c.getApplication().setId(rs.getInt("id_application"));
+                OpportunityService os=new OpportunityService();
+                Opportunity o = os.Display_One_Opportunity(rs.getInt("id_opp"));
+                c.getApplication().setOpportunity(o);
+                //c.getApplication().getOpportunity().setJob_description(rs.getString("opportunity.job_description"));               
+                fos_userService us = new fos_userService();
+                fos_user u = us.get_user_by_id(rs.getInt("opportunity.id_entreprise"));
+                c.getUser().setUsername(u.getUsername());
+                c.getUser().setId(u.getId());
+                c.setPrio(rs.getInt("prio"));
+                lc.add(c);
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(ContractServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        ObservableList lcf = FXCollections.observableArrayList(lc);
+        return lcf;
+
+    }
+
+    @Override
+    public ObservableList<Contract> lowPrioContracts(int id) throws SQLException {
+        List<Contract> lc = new ArrayList<Contract>();
+        try {
+        ConnectionDb db = ConnectionDb.getInstance();
+        Connection cn = db.getCnx();
+        String query = "SELECT * FROM `contract`,`application`,`opportunity` WHERE ((contract.id_application = application.id_application) AND (application.id_opportunity = opportunity.id_opp) AND (opportunity.id_entreprise = " + id + ") AND (contract.prio=0))";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        
+        while (rs.next()) {
+                Contract c = new Contract();
+                c.setId_contract(rs.getInt("id_contract"));
+                c.setPayment_method(rs.getString("payment_method"));
+                c.setStart_date(rs.getDate("Start_date"));
+                c.setFinish_date(rs.getDate("finish_date"));
+                c.setSum(rs.getFloat("sum"));
+                c.getApplication().setId(rs.getInt("id_application"));
+                OpportunityService os=new OpportunityService();
+                Opportunity o = os.Display_One_Opportunity(rs.getInt("id_opp"));
+                c.getApplication().setOpportunity(o);
+                //c.getApplication().getOpportunity().setJob_description(rs.getString("opportunity.job_description"));               
+                fos_userService us = new fos_userService();
+                fos_user u = us.get_user_by_id(rs.getInt("application.id_freelancer"));
+                c.getUser().setUsername(u.getUsername());
+                c.getUser().setId(u.getId());
+                c.setPrio(rs.getInt("prio"));
+                lc.add(c);
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(ContractServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        ObservableList lcf = FXCollections.observableArrayList(lc);
+        return lcf;
+    }
+
+    @Override
+    public void autoGeneratedContract(int id_application) throws SQLException {
+        ConnectionDb db = ConnectionDb.getInstance();
+        Connection cn = db.getCnx();
+        String query = "INSERT INTO `contract`(`id_application`, `prio`) VALUES ("+id_application+",0)";
+        PreparedStatement st = cn.prepareStatement(query);
+        st.execute();
+    }
+
+
+
     
 }

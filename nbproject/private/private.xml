@@ -3,26 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/AcceuilOpportunitiesController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/gui/DisplayOpportunitiesGui.fxml</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/ListOpportunitiesCell.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/AllOpportunitiesController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/Profile_OpportunitiesController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/Add_OpportunitiesController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/gui/ShowApplicationGui.fxml</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/entities/Application.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/UpdateOpportunityGuiController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/smartstart/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/entities/Opportunity.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/gui/AcceuilOpportunities.fxml</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/ApplicationController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/services/OpporunityServiceInterface.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/services/ApplicationService.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/ShowApplicationGuiController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/services/OpportunityService.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/controllers/ShowMyApplicationsGuiController.java</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/gui/UpdateOpportunityGui.fxml</file>
-            <file>file:/C:/Users/acmou/Documents/GitHub/SmartStart/src/com/smartstart/gui/ListOpportunitiesCell.fxml</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/services/OpportunityService.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/gui/AcceuilOpportunities.fxml</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/controllers/AllOpportunitiesController.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/controllers/ComplaintCellGuiController.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/controllers/ShowApplicationGuiController.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/controllers/AcceuilAllOpportunitiesController.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/gui/AcceuilAllOpportunities.fxml</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/smartstart/SmartStart.java</file>
+            <file>file:/C:/Users/Souissi/Documents/SmartStart/src/com/smartstart/controllers/ComplaintsGuiController.java</file>
         </group>
     </open-files>
 </project-private>

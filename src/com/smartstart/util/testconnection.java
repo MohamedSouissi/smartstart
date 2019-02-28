@@ -25,29 +25,19 @@ import javafx.collections.ObservableList;
 public class testconnection {
 
     public static void main(String[] args) throws ParseException {
+        ContractServiceImpl cs = new ContractServiceImpl();
+        Date ds = new Date();
+        Date df = new Date();
         try {
-            ContractServiceImpl cs = new ContractServiceImpl();
-            Date ds = new Date();
-            Date df = new Date();
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                ds = dateFormat.parse("2019-02-13");
-                ds = dateFormat.parse("2019-02-17");
-            } catch (Exception e) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            ds = dateFormat.parse("2019-02-13");
+            ds = dateFormat.parse("2019-02-17");
+        } catch (Exception e) {
             Logger.getLogger(testconnection.class.getName()).log(Level.SEVERE, null, e);
         }
-            Contract c = new Contract(1, "cheque", ds, df, (float) 548.23, 9);
-            Contract c1 = new Contract(2, "en ligne", ds, df, (float) 700.89, 10);
-            //cs.addContract(c);
-            //cs.addContract(c1);
-            ObservableList<Contract> listContract = cs.listContract(1);
-            listContract.stream().forEach(con -> System.out.println(con.getFreelancer()));
-            //cs.removeContract(4);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(testconnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        ObservableList<Contract> listContract = cs.listContract(1);
+        listContract.stream().forEach(con -> System.out.println(con.getApplication().getFreelancer().getId()));
+        
     }
 
 }
